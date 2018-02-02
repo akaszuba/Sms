@@ -19,6 +19,17 @@ return NotificationList("INFO", contacts.toList());
 
     override fun onPostExecute(result: NotificationList?) {
         super.onPostExecute(result)
+
+        if(result != null) {
+           // onComplete.call(result)
+        }
     }
+
+    fun test(): AppDatabase {
+        
+return database
+    }
+
+    fun test(load: Unit) {}
 
 }

@@ -29,21 +29,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+fun load(str: String){
+var btn = this.findViewById<Button>(R.id.button)
+    btn.setText(str)
+}
 
-
-    fun smsRecieved(){
-
-
-
+    fun retr():String{
+        return "gggg"
     }
 
     fun buttonClicked(view: View){
 
-        val retriever = DataRetriever(view.context).execute()
+        MyAsync({ "dddd"}, { res-> load(res)} ).execute()
 
+        val retriever = DataRetriever(view.context );
         val  btn  = view as Button;
         btn.setText("Button Clicked");
     }
+
+
 
     fun isSmsPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
