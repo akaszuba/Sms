@@ -8,9 +8,11 @@ import android.widget.Button
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.app.ActivityCompat
+import android.arch.persistence.room.Room
 
 
 class MainActivity : AppCompatActivity() {
+    var db :AppDatabase? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,14 +22,25 @@ class MainActivity : AppCompatActivity() {
         if(!isSmsPermissionGranted()) {
             requestReadAndSendSmsPermission()
         }
+
+        db = Room.databaseBuilder(applicationContext,
+                AppDatabase::class.java, "database-name").build()
+
+
     }
 
-    fun smsRecieved(text: String){
-        val btn = findViewById<View>(R.id.button) as Button
-        btn.text = "elo"
+
+
+    fun smsRecieved(){
+
+
+
     }
 
     fun buttonClicked(view: View){
+
+        val retriever = DataRetriever(view.context).execute()
+
         val  btn  = view as Button;
         btn.setText("Button Clicked");
     }
