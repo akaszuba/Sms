@@ -8,5 +8,5 @@ import android.arch.persistence.room.PrimaryKey
  */
 @Entity(tableName = "Contacts")
 class ContactDto(@PrimaryKey var phoneNumber:String, var name :String) {
-constructor():this("","")
+ constructor():this("","")
 }

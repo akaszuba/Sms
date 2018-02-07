@@ -8,55 +8,57 @@ import android.widget.Button
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.app.ActivityCompat
-import android.arch.persistence.room.Room
+import android.widget.TextView
 
 
 class MainActivity : AppCompatActivity() {
-    var db :AppDatabase? = null;
+    var db: AppDatabase? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-        if(!isSmsPermissionGranted()) {
+        if (!isSmsPermissionGranted()) {
             requestReadAndSendSmsPermission()
         }
 
-        db = Room.databaseBuilder(applicationContext,
-                AppDatabase::class.java, "database-name").build()
-
-
+        db = AppDatabase.getDatabase(applicationContext);
     }
 
-fun load(str: String){
-var btn = this.findViewById<Button>(R.id.button)
-    btn.setText(str)
-}
-
-    fun retr():String{
-        return "gggg"
+    fun refreshData(array: Array<ContactDto>) {
+        if (db != null) {
+            var list = findViewById<TextView>(R.id.textView)
+            array.forEach { item ->
+                list.append("Name: ${item.name}, Phone: ${item.phoneNumber}.\r\n")
+            }
+        }
     }
 
-    fun buttonClicked(view: View){
+    fun buttonClicked(view: View) {
+        if (db != null) {
+            AsyncTask({ db!!.contactDao().selectAll() }, { res -> refreshData(res) }).execute()
 
-        MyAsync({ "dddd"}, { res-> load(res)} ).execute()
-
-        val retriever = DataRetriever(view.context );
-        val  btn  = view as Button;
-        btn.setText("Button Clicked");
+            val btn = view as Button;
+            btn.setText("Button Clicked");
+        }
     }
 
-
+    fun addContactClicked(view: View){
+        if (db != null) {
+            AsyncTask({ db!!.contactDao().addContact(ContactDto("345","contact1"))
+            }).execute()
+        }
+    }
 
     fun isSmsPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
-        && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
-        && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
     }
 
     fun requestReadAndSendSmsPermission() {
 
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS),123)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS), 123)
     }
 }
