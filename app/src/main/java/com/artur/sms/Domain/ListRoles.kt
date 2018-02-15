@@ -1,4 +1,4 @@
-package com.artur.sms
+package com.artur.sms.Domain
 
 import android.arch.persistence.room.TypeConverter
 

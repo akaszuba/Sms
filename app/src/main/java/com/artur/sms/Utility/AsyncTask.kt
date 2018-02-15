@@ -1,4 +1,4 @@
-package com.artur.sms
+package com.artur.sms.Utility
 
 import android.os.AsyncTask
 

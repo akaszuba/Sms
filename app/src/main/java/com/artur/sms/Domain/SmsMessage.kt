@@ -1,4 +1,4 @@
-package com.artur.sms
+package com.artur.sms.Domain
 
 /**
  * Created by Artur on 2/7/2018.

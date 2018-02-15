@@ -1,7 +1,9 @@
-package com.artur.sms
+package com.artur.sms.Service
 
 import android.content.Context
 import android.widget.Toast
+import com.artur.sms.DataAccess.AppDatabase
+import com.artur.sms.Domain.SmsMessage
 
 /**
  * Created by Artur on 2/7/2018.

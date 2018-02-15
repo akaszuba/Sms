@@ -1,9 +1,10 @@
-package com.artur.sms
+package com.artur.sms.Service
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
+import com.artur.sms.Domain.SmsMessage
 
 class SmsListener : BroadcastReceiver() {
 

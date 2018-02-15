@@ -1,6 +1,7 @@
-package com.artur.sms
+package com.artur.sms.DataAccess
 
 import android.arch.persistence.room.TypeConverter
+import com.artur.sms.Domain.ListRoles
 
 /**
  * Created by Artur on 2/7/2018.
