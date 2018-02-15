@@ -18,6 +18,7 @@ import com.artur.sms.DataTransfer.ContactDto
 import com.artur.sms.R
 import com.artur.sms.Service.ListManager
 import com.artur.sms.Utility.AsyncTask
+import com.artur.sms.Utility.formatPhone
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             requestReadAndSendSmsPermission()
         }
 
-
+val jj = "+48 09 98".formatPhone();
     }
 
     fun refreshData() {

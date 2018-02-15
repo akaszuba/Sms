@@ -14,7 +14,7 @@ import com.artur.sms.DataTransfer.ListDto
 @Dao
 interface ContactDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(dto: ContactDto)
+    fun insert(dto: ContactDto): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(dto: ListDto)
