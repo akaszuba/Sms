@@ -42,6 +42,10 @@ class ListManager(context: Context) {
         contactDao.insert(xref)
     }
 
+    fun removeUserFromList(contactId:Int, listId:Int){
+
+    }
+
     companion object {
         private var localInstance: ListManager? = null
         fun getInstance(context: Context): ListManager {
