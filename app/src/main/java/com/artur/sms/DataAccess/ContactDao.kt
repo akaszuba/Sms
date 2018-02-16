@@ -1,9 +1,6 @@
 package com.artur.sms.DataAccess
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import com.artur.sms.DataTransfer.ContactDto
 import com.artur.sms.DataTransfer.ContactListDto
 import com.artur.sms.DataTransfer.ListDto
@@ -27,6 +24,15 @@ interface ContactDao {
 
     @Query("SELECT * FROM Contacts")
     fun selectAll(): Array<ContactDto>
+
+    @Delete()
+    fun delete(dto: ListDto)
+
+    @Delete()
+    fun delete(dto: ContactListDto)
+
+    @Delete()
+    fun delete(dto: ContactDto)
 
 
 }

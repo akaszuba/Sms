@@ -10,15 +10,11 @@ import android.widget.Button
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.app.ActivityCompat
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.TextView
-import com.artur.sms.DataAccess.AppDatabase
-import com.artur.sms.DataTransfer.ContactDto
+import com.artur.sms.Domain.ListRoles
 import com.artur.sms.R
 import com.artur.sms.Service.ListManager
 import com.artur.sms.Utility.AsyncTask
-import com.artur.sms.Utility.formatPhone
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             requestReadAndSendSmsPermission()
         }
 
-val jj = "+48 09 98".formatPhone();
     }
 
     fun refreshData() {
@@ -45,9 +40,7 @@ val jj = "+48 09 98".formatPhone();
 
     fun buttonClicked(view: View) {
 
-        var dialogView = LinearLayout(this)
-        dialogView.addView(EditText(this))
-        findViewById<LinearLayout>(R.id.linearLayout).addView(dialogView)
+
     }
 
     fun addNewListClicked(view: View){
@@ -64,11 +57,11 @@ val jj = "+48 09 98".formatPhone();
     }
 
     fun addContactClicked(view: View) {
-        val prompt =NamePrompt({name->
+        val prompt =NameAndPhonePrompt({ name,phone->
             if(name != ""){
             AsyncTask({ ListManager.getInstance(this)
 
-                            .createNewList(name)
+                    .createNewUser(name,phone,1,ListRoles.Member)
                     }, { refreshData() }).execute()
             true}
             else false
