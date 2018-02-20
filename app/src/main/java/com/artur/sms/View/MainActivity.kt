@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.artur.sms.Domain.ListRoles
 import com.artur.sms.R
 import com.artur.sms.Service.ListManager
+import com.artur.sms.Service.SmsSender
 import com.artur.sms.Utility.AsyncTask
 
 
@@ -30,17 +31,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun refreshData() {
-        var list = findViewById<TextView>(R.id.textView)
-        AsyncTask({ ListManager.getInstance(this).getActiveLists() }, { result ->
-            result.forEach { item ->
-                list.append("Name: ${item.name}, Phone: ${item.id}.\r\n")
-            }
-        }).execute()
+//        var list = findViewById<TextView>(R.id.textView)
+//        AsyncTask({ ListManager.getInstance(this).getActiveLists() }, { result ->
+//            result.forEach { item ->
+//                list.append("Name: ${item.name}, Phone: ${item.id}.\r\n")
+//            }
+//        }).execute()
     }
 
     fun buttonClicked(view: View) {
 
-
+        SmsSender(this).sendTextMesage()
     }
 
     fun addNewListClicked(view: View){
@@ -74,11 +75,14 @@ class MainActivity : AppCompatActivity() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+
+
     }
 
     fun requestReadAndSendSmsPermission() {
 
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS), 123)
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS,Manifest.permission.READ_PHONE_STATE ), 123)
     }
 }
 

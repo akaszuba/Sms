@@ -23,17 +23,17 @@ interface ContactDao {
     fun selectAllLists(): Array<ListDto>
 
     @Query("SELECT * FROM Contacts")
-    fun selectAll(): Array<ContactDto>
+    fun selectAllContacts(): Array<ContactDto>
+
+    @Query("SELECT * FROM ContactListXrefs")
+    fun selectAllXrefs(): Array<ContactListDto>
 
     @Delete()
-    fun delete(dto: ListDto)
-
+    fun delete(dto:ContactDto)
     @Delete()
-    fun delete(dto: ContactListDto)
-
+    fun delete(dto:ListDto)
     @Delete()
-    fun delete(dto: ContactDto)
-
+    fun delete(dto:ContactListDto)
 
 }
 

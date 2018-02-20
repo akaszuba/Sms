@@ -5,7 +5,7 @@ package com.artur.sms.Utility
  */
 fun String.formatPhone(phoneNumberLength: Int = 9, defaultCountryCode: String = "48"): String{
     return  Regex("[^\\d]").replace(this,"")
-            .convert { number->"${number.getPrefix(phoneNumberLength,defaultCountryCode)}${number.getSuffix(phoneNumberLength)}" }
+            .convert { number->"$+{number.getPrefix(phoneNumberLength,defaultCountryCode)}${number.getSuffix(phoneNumberLength)}" }
 }
 
 fun String.getSuffix(length : Int): String{

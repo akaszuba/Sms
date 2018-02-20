@@ -30,7 +30,7 @@ class ListManager(context: Context) {
     }
 
     fun createNewUser(name: String, phoneNumber: String, listId: Int, role: ListRoles){
-        var contact = contactDao.selectAll().find { contact-> contact.phoneNumber == phoneNumber.formatPhone() }
+        var contact = contactDao.selectAllContacts().find { contact-> contact.phoneNumber == phoneNumber.formatPhone() }
         if(contact == null){
             contact = ContactDto(phoneNumber = phoneNumber, name = name)
             val id = contactDao.insert(contact)
@@ -42,7 +42,16 @@ class ListManager(context: Context) {
     }
 
     fun removeUserFromList(contactId:Int, listId:Int){
+        var xrefToDelete =  contactDao.selectAllXrefs().find { xref-> xref.contactId == contactId && xref.listId == listId }
+        if (xrefToDelete != null){ contactDao.delete(xrefToDelete)}
 
+        //delete user if it is not assigned to any other list
+        if(!contactDao.selectAllXrefs().any{xref-> xref.contactId == contactId}){
+            val contactToDelete = contactDao.selectAllContacts().find { contact-> contact.id == contactId }
+            if(contactToDelete != null){
+                contactDao.delete(contactToDelete)
+            }
+        }
     }
 
     companion object {

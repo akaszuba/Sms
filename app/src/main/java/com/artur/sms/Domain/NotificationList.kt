@@ -11,4 +11,6 @@ class NotificationList(val id: Int?, var name:String, var isDefault : Boolean = 
     constructor(listDto: ListDto):this(listDto.id, listDto.name, listDto.isDefault)
     constructor(name:String): this(null, name,false)
 
+    val messageTemplate:String =""
+    val members: ArrayList<ContactDto> = ArrayList()
 }
