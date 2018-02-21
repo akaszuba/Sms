@@ -7,10 +7,17 @@ import kotlin.collections.List
 /**
  * Created by Artur on 1/27/2018.
  */
-class NotificationList(val id: Int?, var name:String, var isDefault : Boolean = false) {
-    constructor(listDto: ListDto):this(listDto.id, listDto.name, listDto.isDefault)
-    constructor(name:String): this(null, name,false)
+class NotificationList(private val listDto: ListDto, val members:List<Contact> ) {
 
-    val messageTemplate:String =""
-    val members: ArrayList<ContactDto> = ArrayList()
+    var messageTemplate
+            get() = listDto.messageTemplate
+        set(value) {listDto.messageTemplate =value}
+
+    var name
+        get() = listDto.name
+        set(value) {listDto.name =value}
+
+    override fun toString(): String {
+        return listDto.name;
+    }
 }

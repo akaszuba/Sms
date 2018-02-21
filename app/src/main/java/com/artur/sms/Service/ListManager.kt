@@ -5,6 +5,7 @@ import com.artur.sms.DataAccess.AppDatabase
 import com.artur.sms.DataTransfer.ContactDto
 import com.artur.sms.DataTransfer.ContactListDto
 import com.artur.sms.DataTransfer.ListDto
+import com.artur.sms.Domain.Contact
 import com.artur.sms.Domain.ListRoles
 import com.artur.sms.Domain.NotificationList
 import com.artur.sms.Utility.formatPhone
@@ -17,16 +18,21 @@ class ListManager(context: Context) {
 
     fun getActiveLists(): List<NotificationList> {
 
+        val xrefsDtos = contactDao.selectAllXrefs()
+        val contacts = contactDao.selectAllContacts().map{dto-> Contact(dto, xrefsDtos.filter { xref->xref.contactId == dto.id }) }
+
         return contactDao.selectAllLists().map { listDto ->
-            NotificationList(listDto)
+            NotificationList(listDto, contacts.filter { contact->contact.isListMember(listDto.id!!) })
         }
     }
 
-    fun createNewList(name: String): NotificationList {
+    fun createNewList(name: String) {
         val dto = ListDto(null, name, false)
         contactDao.insert(dto)
+    }
 
-        return NotificationList(dto)
+    fun deleteList(listToDelete:NotificationList){
+
     }
 
     fun createNewUser(name: String, phoneNumber: String, listId: Int, role: ListRoles){

@@ -23,11 +23,53 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="buttonClicked"
-            android:text="Button" />
+            android:text="test" />
+
+        <Spinner
+            android:id="@+id/selectList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnRemoveSelectedList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="removeCurrentListClicked"
+                android:text="Delete List" />
+
+            <Button
+                android:id="@+id/btnCreateNewList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="addNewListClicked"
+                android:text="Add New" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@+id/swDefaultList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Default" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +122,7 @@
                 android:layout_weight="5" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/btnChangeMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

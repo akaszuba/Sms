@@ -13,7 +13,7 @@ import com.artur.sms.DataTransfer.ListDto
 /**
  * Created by Artur on 1/18/2018.
  */
-@Database(version = 5,entities = arrayOf(ContactDto::class, ContactListDto::class, ListDto::class))
+@Database(version = 6,entities = arrayOf(ContactDto::class, ContactListDto::class, ListDto::class))
 @TypeConverters(DbTypeConverters::class)
 abstract class AppDatabase:RoomDatabase() {
     abstract fun contactDao(): ContactDao
